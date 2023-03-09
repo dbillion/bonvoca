@@ -1,0 +1,27 @@
+{% extends 'vocap/base.html' %}
+{% block content %}
+ <title>Weather App</title>
+
+<div class="container">
+  <h1>Weather App</h1>
+  <form method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+  <div class="row">
+      {% for city_weather in weather_data %}
+      <div class="col-md-4">
+          <div class="card mt-4">
+              <div class="card-body">
+                  <h5>{{ city_weather.city }}</h5>
+                  <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="">
+                  <p>{{ city_weather.temperature }} °C</p>
+                  <p>{{ city_weather.description }}</p>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}
